@@ -8,7 +8,8 @@ import Header from './componentes/layout/Header';
 import Navegacion from './componentes/layout/Navegacion';
 
 /** Componentes ***/
-import Clientes from './componentes/clientes/clientes';
+import Clientes from './componentes/clientes/Clientes';
+import NuevoCliente from './componentes/clientes/NuevoCliente';
 import Pedidos from './componentes/pedidos/Pedidos';
 import Productos from './componentes/productos/Productos';
 
@@ -26,6 +27,8 @@ function App() {
             {/* se usa con React Router Dom */}
             <Routes>
               <Route path="/" element={<Clientes/>} /> 
+
+              <Route path="/clientes/nuevo" element={<NuevoCliente/>} />
 
               <Route path="/productos" element={<Productos/>} />
 
