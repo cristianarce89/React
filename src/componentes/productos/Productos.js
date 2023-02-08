@@ -2,8 +2,8 @@ import React, { useEffect, useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 // importar cliente axios
 import clienteAxios from '../../config/axios';
-
 import Producto from './Producto';
+import Spinner from '../layout/Spinner';
 
 const Productos = () => {
 
@@ -19,7 +19,11 @@ const Productos = () => {
         }
         //llamado a la API
         consultarAPI();
-    }, []);
+    }, [productos]);//se pone productos dentro del aary para que se actualize los productos cada vez que se elimine algo
+
+    //spinner de carga
+
+    if(!productos.length) return <Spinner />
 
     return (
         <Fragment>

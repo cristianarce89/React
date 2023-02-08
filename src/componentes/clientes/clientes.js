@@ -3,8 +3,8 @@ import React, { useEffect, useState, Fragment } from 'react'
 //importar cliente axios
 import clienteAxios from '../../config/axios';
 import Cliente from './Cliente';
-
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Spinner from '../layout/Spinner';
 
 const Clientes = () => {
 
@@ -25,6 +25,10 @@ const Clientes = () => {
         consultarAPI();
     }, [clientes]);
 
+    //spinner de carga
+
+    if (!clientes.length) return <Spinner />
+
     return (
         <Fragment>
             <h2>Clientes</h2>
@@ -36,7 +40,7 @@ const Clientes = () => {
 
             <ul className='listado-clientes'>
                 {clientes.map(cliente => (
-                    <Cliente 
+                    <Cliente
                         key={cliente._id}
                         cliente={cliente}
                     />
