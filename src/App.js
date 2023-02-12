@@ -17,10 +17,9 @@ import Productos from './componentes/productos/Productos';
 import NuevoProducto from './componentes/productos/NuevoProducto';
 import EditarProducto from './componentes/productos/EditarProducto';
 
-
 /** Componentes Pedidos***/
-
 import Pedidos from './componentes/pedidos/Pedidos';
+import NuevoPedido from './componentes/pedidos/NuevoPedido';
 
 
 
@@ -45,6 +44,7 @@ function App() {
               <Route path="/productos/editar/:id" element={<EditarProducto/>} />
 
               <Route path="/pedidos" element={<Pedidos/>} />
+              <Route path="/pedidos/nuevo/:id" element={<NuevoPedido/>} />
             </Routes>
           </main>
         </div>
