@@ -1,6 +1,17 @@
 import React, { useState, Fragment } from 'react';
+import Swal from 'sweetalert2';
+import clienteAxios from '../../config/axios';
+import { useNavigate } from 'react-router-dom';
 
-const NuevoProducto = () => {
+// redirecionamiento
+// import { useNavigate } from 'react-router-dom';
+// const navigate = useNavigate(); 
+// navigate('/')
+
+
+const NuevoProducto = (props) => {
+
+    const navigate = useNavigate();
 
     //producto = state, guardarProducto = setstate
     const [producto, guardarProducto] = useState ({
@@ -9,6 +20,47 @@ const NuevoProducto = () => {
     });
     // archivo = state, guardarArchivo = setState
     const [archivo, guardarArchivo] = useState('');
+
+    //almacena el nuevo producto en la base de datos
+    const agregarProducto = async e => {
+        e.preventDefault();
+
+        //crear un formdata para los datos
+        const formData = new FormData();
+        formData.append('nombre', producto.nombre);
+        formData.append('precio', producto.precio);
+        formData.append('imagen', archivo);
+
+        //almacearlo en la base de datos
+        try {
+            const res = await clienteAxios.post('/productos', formData, {
+                headers: {
+                    'Content-Type' : 'multipart/form-data'
+                }
+            });
+
+            //Lanzar una alerta
+            if(res.status === 200){
+                Swal.fire(
+                    'Agregado Correctamente',
+                    res.data.mensaje,
+                    'success'
+                )
+            }
+
+            //redireccionar
+            navigate('/productos', {replace:true});
+
+        } catch (error) {
+            console.log(error);
+            //lanzar alerta
+            Swal.fire({
+                type:'error',
+                title: 'Hubo un error',
+                text: 'Vuelva a intentarlo'
+            })
+        }
+    }
 
     //leer los datos del formulario
     const leerInformacionProducto = e => {
@@ -28,7 +80,9 @@ const NuevoProducto = () => {
         <Fragment>
             <h2>Nuevo Producto</h2>
 
-            <form>
+            <form
+                onSubmit={agregarProducto}
+            >
                 <legend>Llena todos los campos</legend>
 
                 <div className="campo">
