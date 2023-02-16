@@ -13,10 +13,10 @@ function DetallesPedido({ pedido }) {
                 <div className="articulos-pedido">
                     <p className="productos">Artículos Pedido: </p>
                     <ul>
-                        {pedido.pedido.map(articulos => console.log(pedido)(
-                            <li key={pedido._id+articulos.producto._id}>
-                                <p>{articulos.producto.nombre}</p>
-                                <p>Precio: ${articulos.producto.precio}</p>
+                        {pedido.pedido.map(articulos => (
+                            <li key={pedido._id}>
+                                <p>{pedido.nombre}</p>
+                                <p>Precio: ${pedido.precio}</p>
                                 <p>Cantidad: {articulos.cantidad}</p>
                             </li>
                         ))}
